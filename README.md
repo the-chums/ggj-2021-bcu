@@ -6,7 +6,11 @@ Unity Version: 2019.4.18f1 (LTS)
 Build option: Windows build support
 
 Team:
-  Sean Quin
-  Joe Robbins
-  Rowan Stringer
-  Liam Blunden
+
+    Sean Quinn 
+  
+    Joe Robbins
+  
+    Rowan Stringer
+  
+    Liam Blunden
