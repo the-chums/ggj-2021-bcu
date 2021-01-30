@@ -31,7 +31,7 @@ public class Item : MonoBehaviour
     public void OnPutDown()
     {
         transform.SetParent(null);
-        transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        transform.localScale = new Vector3(1f, 1f, 1);
         Collider.enabled = true;
     }
 
@@ -53,6 +53,7 @@ public class Item : MonoBehaviour
 
     public void SetOnConveyor()
     {
+        transform.localScale = new Vector3(0.75f, 0.75f, 1);
         PlacedOnConveyor = true;
     }
 

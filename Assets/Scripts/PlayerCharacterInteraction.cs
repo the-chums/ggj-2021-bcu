@@ -5,6 +5,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
 {
     public GridHelper GridHelper;
     public ConveyorTileManager ConveyorTileManager;
+    public BoxCollider2D InteractableBoxTrigger;
 
     private BoxCollider2D BoxTrigger;
     private Item HeldItem;
@@ -21,10 +22,12 @@ public class PlayerCharacterInteraction : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             List<Collider2D> collidersInRange = new List<Collider2D>();
-            int collidersInRangeCount = BoxTrigger.OverlapCollider(new ContactFilter2D(), collidersInRange);
+            int collidersInRangeCount = InteractableBoxTrigger.OverlapCollider(new ContactFilter2D(), collidersInRange);
 
             if (HeldItem == null)
             {
+                Debug.Log("Nothing held, picking up");
+
                 if (collidersInRangeCount == 0)
                 {
                     return;
@@ -48,36 +51,48 @@ public class PlayerCharacterInteraction : MonoBehaviour
                 var charPos = transform.position;
                 var targetPos = charPos + transform.up;
                 var targetGridPos = GridHelper.WorldToGridPos(targetPos);
+                var onConveyor = false;
 
-                foreach (Collider2D colliderInRange in collidersInRange)
+                if(collidersInRange != null && collidersInRange.Count > 0)
                 {
-                    var tilemapInRange = colliderInRange.GetComponent<UnityEngine.Tilemaps.TilemapCollider2D>();
-
-                    if (tilemapInRange)
+                    foreach (Collider2D colliderInRange in collidersInRange)
                     {
-                        
-                        var gridTileType = ConveyorTileManager.GetTileTypeIdentifier(targetGridPos);
+                        var tilemapInRange = colliderInRange.GetComponent<UnityEngine.Tilemaps.TilemapCollider2D>();
 
-                        if(gridTileType == null)
+                        if (tilemapInRange)
                         {
-                            return;
-                        }
+                            var gridTileType = ConveyorTileManager.GetTileTypeIdentifier(targetGridPos);
 
-                        if (gridTileType.Contains("entry"))
-                        {
-                            FindObjectOfType<ConveyorItemMover>().AddItemToConveyor(HeldItem, targetGridPos);
-                            HeldItem.SetOnConveyor();
-                            break;
-                        }
-                        else
-                        {
-                            return;
+                            if (gridTileType != null && gridTileType.Contains("entry"))
+                            {
+                                onConveyor = true;
+                                FindObjectOfType<ConveyorItemMover>().AddItemToConveyor(HeldItem, targetGridPos);
+                                Debug.Log(targetGridPos + ", type: " + gridTileType);
+                                break;
+                            }
+                            else
+                            {
+                                Debug.Log("not entry: " + targetGridPos + ", type: " + gridTileType);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    Debug.Log("Attempting to place, no colliders");
+                }
 
-                HeldItem.SetPosition(targetGridPos);
                 HeldItem.OnPutDown();
+                
+                if (onConveyor)
+                {
+                    HeldItem.SetOnConveyor();
+                }
+                else
+                {
+                    HeldItem.SetPosition(targetGridPos);
+                }
+                
                 HeldItem = null;
             }
         }
