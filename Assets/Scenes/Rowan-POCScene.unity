@@ -588,6 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 915075160}
   - component: {fileID: 915075159}
+  - component: {fileID: 915075161}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -623,6 +624,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &915075161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915075158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7dcc1f7346cd0c408b37ededd2715cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XOffset: 19
+  YOffset: 12
 --- !u!1001 &1462081686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1940,6 +1955,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2651051794939645, guid: bebe714397062664182e16a0b4f8d0d3, type: 3}
+      propertyPath: GridHelper
+      value: 
+      objectReference: {fileID: 915075161}
+    - target: {fileID: 2651051794939645, guid: bebe714397062664182e16a0b4f8d0d3, type: 3}
+      propertyPath: ConveyorTileManager
+      value: 
+      objectReference: {fileID: 299310052}
     - target: {fileID: 8241543009751648712, guid: bebe714397062664182e16a0b4f8d0d3,
         type: 3}
       propertyPath: m_RootOrder

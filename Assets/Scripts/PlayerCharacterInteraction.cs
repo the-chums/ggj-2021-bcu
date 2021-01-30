@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCharacterInteraction : MonoBehaviour
 {
+    public GridHelper GridHelper;
+    public ConveyorTileManager ConveyorTileManager;
+
     private BoxCollider2D BoxTrigger;
-
     private Item HeldItem;
-
     private Vector3 ItemDropOffset;
 
     void Start()
@@ -50,23 +50,13 @@ public class PlayerCharacterInteraction : MonoBehaviour
                     if (tilemapInRange)
                     {
                         var charPos = transform.position;
-                        var targetPos = charPos + transform.forward;
-                        var targetGridPos = WorldToGridPos(targetPos);
-
-                        //HeldItem = itemInRange;
-                        //itemInRange.OnPickedUp();
+                        var targetPos = charPos + transform.up;
+                        var targetGridPos = GridHelper.WorldToGridPos(targetPos);
+                        var gridTile = ConveyorTileManager.GetTileActionIdentifier(targetGridPos);
+                        Debug.Log(gridTile);
                     }
                 }
-
-                //HeldItem.transform.position = transform.position + transform.rotation * ItemDropOffset;
-                //HeldItem.OnPutDown();
-                HeldItem = null;
             }
         }
-    }
-
-    private Vector2 WorldToGridPos(Vector2 position)
-    {
-        return position;
     }
 }
