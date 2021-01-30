@@ -51,8 +51,9 @@ public class ConveyorItemMover : MonoBehaviour
         Vector2Int itemPosition = item.GetPosition();
 
         string currentTileAction = ConveyorTileManager.GetTileActionIdentifier(itemPosition);
+        ConveyorTileManager.TileState tileState = ConveyorTileManager.GetTileState(itemPosition);
 
-        Direction currentTileExitDirection = GetExitDirection(currentTileAction);
+        Direction currentTileExitDirection = GetExitDirection(currentTileAction, tileState, item);
 
         Vector2Int newPosition = itemPosition;
         
@@ -73,9 +74,14 @@ public class ConveyorItemMover : MonoBehaviour
         }
 
         item.SetPosition(newPosition);
+
+        if(tileState != null)
+        {
+            tileState.UpdateOnItemLeaving();
+        }
     }
 
-    Direction GetExitDirection(string tileAction)
+    Direction GetExitDirection(string tileAction, ConveyorTileManager.TileState tileState, Item item)
     {
         switch(tileAction)
         {
@@ -87,9 +93,37 @@ public class ConveyorItemMover : MonoBehaviour
                 return Direction.Down;
             case "left":
                 return Direction.Left;
+            case "binary_alternating":
+                {
+                    var state = (ConveyorTileManager.AlternatingTileState)tileState;
+
+                    if (state.Count % 2 == 0)
+                    {
+                        return Direction.Left;
+                    }
+                    else
+                    {
+                        return Direction.Right;
+                    }
+                }
+            case "ternary_alternating":
+                {
+                    var state = (ConveyorTileManager.AlternatingTileState)tileState;
+                    if (state.Count % 3 == 0)
+                    {
+                        return Direction.Left;
+                    }
+                    else if (state.Count % 3 == 1)
+                    {
+                        return Direction.Up;
+                    }
+                    else
+                    {
+                        return Direction.Right;
+                    }
+                }
             default:
-                Debug.Assert(false);
-                return Direction.Up;
+                return Direction.None;
         }
     }
 
