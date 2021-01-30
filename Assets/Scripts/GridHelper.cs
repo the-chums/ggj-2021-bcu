@@ -14,8 +14,8 @@ public class GridHelper : MonoBehaviour
 
     public Vector3 GridToWorldPos(Vector2Int position)
     {
-        float floorPosX = position.x - XOffset;
-        float floorPosY = position.y - YOffset;
+        float floorPosX = position.x - XOffset + 0.5f;
+        float floorPosY = position.y - YOffset + 0.5f;
         return new Vector3(floorPosX, floorPosY, 0);
     }
 }

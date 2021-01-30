@@ -3,22 +3,28 @@
 public class Item : MonoBehaviour
 {
     private SpriteRenderer Sprite;
+    private BoxCollider2D Collider;
 
     private Vector2Int Position;
 
     void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
+        Collider = GetComponent<BoxCollider2D>();
     }
 
     public void OnPickedUp()
     {
-        Sprite.enabled = false;
+        transform.localPosition = Vector3.up * 0.75f;
+        transform.localScale = new Vector3(0.75f, 0.75f, 1);
+        Collider.enabled = false;
     }
 
     public void OnPutDown()
     {
-        Sprite.enabled = true;
+        transform.SetParent(null);
+        transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        Collider.enabled = true;
     }
 
     public Vector2Int GetPosition()
