@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: x_pattern_1
+  m_Name: conveyor-corner-bl 1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 8805fed3161fe464795d199cafb66457, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba24e814a7b232b4e924d002774c9f08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.49803922}
   m_Transform:
     e00: 1

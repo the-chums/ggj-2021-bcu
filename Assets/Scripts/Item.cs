@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 
+[ExecuteInEditMode]
 public class Item : MonoBehaviour
 {
+    public ItemColour Colour;
+    public ItemType Type;
+    
+    public SpriteRenderer BackgroundSprite;
+
     private SpriteRenderer Sprite;
     private BoxCollider2D Collider;
 
@@ -48,5 +54,19 @@ public class Item : MonoBehaviour
     public void SetOnConveyor()
     {
         PlacedOnConveyor = true;
+    }
+
+    void OnValidate()
+    {
+        if (Sprite)
+        {
+            Sprite.sprite = Type.Sprite;
+        }
+
+        if (BackgroundSprite != null && Colour != null)
+        {
+            ColorUtility.TryParseHtmlString($"#{Colour.Hex}", out Color color);
+            BackgroundSprite.color = color;
+        }
     }
 }
