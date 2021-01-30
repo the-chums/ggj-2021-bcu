@@ -37,25 +37,37 @@ public class PlayerCharacterInteraction : MonoBehaviour
                     if (itemInRange)
                     {
                         HeldItem = itemInRange;
+                        itemInRange.transform.SetParent(transform);
                         itemInRange.OnPickedUp();
                     }
                 }
             }
             else
             {
+                var charPos = transform.position;
+                var targetPos = charPos + transform.up;
+                var targetGridPos = GridHelper.WorldToGridPos(targetPos);
+
                 foreach (Collider2D colliderInRange in collidersInRange)
                 {
                     var tilemapInRange = colliderInRange.GetComponent<UnityEngine.Tilemaps.TilemapCollider2D>();
 
                     if (tilemapInRange)
                     {
-                        var charPos = transform.position;
-                        var targetPos = charPos + transform.up;
-                        var targetGridPos = GridHelper.WorldToGridPos(targetPos);
-                        var gridTile = ConveyorTileManager.GetTileTypeIdentifier(targetGridPos);
-                        Debug.Log(gridTile);
+                        
+                        var gridTileType = ConveyorTileManager.GetTileTypeIdentifier(targetGridPos);
+
+                        if (gridTileType.Contains("entry"))
+                        {
+                            FindObjectOfType<ConveyorItemMover>().AddItemToConveyor(HeldItem, targetGridPos);
+                            break;
+                        }
                     }
                 }
+
+                HeldItem.SetPosition(targetGridPos);
+                HeldItem.OnPutDown();
+                HeldItem = null;
             }
         }
     }
