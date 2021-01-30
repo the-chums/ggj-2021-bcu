@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
 {
     private Dictionary<string, ConveyorTile> _tileMap = new Dictionary<string, ConveyorTile>();
-    
+
     void Start()
     {
         Tilemap tilemap = GetComponent<Tilemap>();
@@ -20,8 +20,8 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 TileBase tile = allTiles[x + y * bounds.size.x];
                 if (tile != null)
                 {
-                    Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                    _tileMap.Add(GetCoordsKey(x,y), new ConveyorTile(x,y,tile.name));
+                    //Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
+                    _tileMap.Add(GetCoordsKey(x, y), new ConveyorTile(x, y, tile.name));
                 }
             }
         }
@@ -32,19 +32,46 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
         return $"{x}_{y}";
     }
 
-    public string GetTileActionIdentifier(Vector2Int position)
+    public ConveyorTile GetTile(Vector2Int position)
     {
         // Find tile
         var key = GetCoordsKey(position.x, position.y);
         _tileMap.TryGetValue(key, out ConveyorTile tile);
 
         // Return action
-        if(tile != null)
+        if (tile != null)
         {
-            // Check basic directions
-            var cardinalDirections = new string[] { "Up", "Right", "Down", "Left" };
+            return tile;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public string GetTileTypeIdentifier(Vector2Int position)
+    {
+        var tile = GetTile(position);
 
-            foreach(var direction in cardinalDirections)
+        if (tile != null)
+        {
+            if(tile.Name.Contains("entry"))
+            {
+                return "entry";
+            }
+        }
+     
+        return null;
+    }
+
+    public string GetTileActionIdentifier(Vector2Int position)
+    {
+        var tile = GetTile(position);
+
+        if (tile != null) {
+            // Check basic directions
+            var cardinalDirections = new string[] { "up", "right", "down", "left" };
+
+            foreach (var direction in cardinalDirections)
             {
                 if (tile.Name.Contains(direction))
                 {

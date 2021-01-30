@@ -52,7 +52,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
                         var charPos = transform.position;
                         var targetPos = charPos + transform.up;
                         var targetGridPos = GridHelper.WorldToGridPos(targetPos);
-                        var gridTile = ConveyorTileManager.GetTileActionIdentifier(targetGridPos);
+                        var gridTile = ConveyorTileManager.GetTileTypeIdentifier(targetGridPos);
                         Debug.Log(gridTile);
                     }
                 }
