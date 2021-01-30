@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using UnityEngine;
+﻿using UnityEngine;
 
 using Vector2 = UnityEngine.Vector2;
 
@@ -9,12 +6,13 @@ public class PlayerCharacterMovement : MonoBehaviour
 {
     public float Acceleration = 10f;
     public float MaxVelocity = 5f;
-    
-    private Rigidbody2D RigidBody;
+    public Transform CharacterFace;
+
+    private Rigidbody2D _rigidbody;
 
     void Start()
     {
-        RigidBody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -28,7 +26,7 @@ public class PlayerCharacterMovement : MonoBehaviour
         float accelerationY = verticalInput * accelerationDelta;
         Vector2 acceleration = new Vector2(accelerationX, accelerationY);
 
-        RigidBody.velocity += acceleration;
+        _rigidbody.velocity += acceleration;
 
         float zRotation = transform.eulerAngles.z;
 
@@ -55,6 +53,6 @@ public class PlayerCharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        RigidBody.velocity = Vector2.ClampMagnitude(RigidBody.velocity, MaxVelocity);
+        _rigidbody.velocity = Vector2.ClampMagnitude(_rigidbody.velocity, MaxVelocity);
     }
 }
