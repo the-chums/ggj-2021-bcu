@@ -88,17 +88,57 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
         }
     }
 
+    public TileState GetTileState(Vector2Int position)
+    {
+        var tile = GetTile(position);
+
+        if (tile != null)
+        {
+            return tile.State;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public abstract class TileState
+    {
+        public abstract void UpdateOnItemLeaving();
+    };
+
+    public class AlternatingTileState : TileState
+    {
+        public int Count;
+
+        public override void UpdateOnItemLeaving()
+        {
+            Count++;
+        }
+    }
+
     public class ConveyorTile
     {
         public int X;
         public int Y;
         public string Name;
+        public TileState State;
 
         public ConveyorTile(int x, int y, string name)
         {
             X = x;
             Y = y;
             Name = name;
+
+            switch(name)
+            {
+                case "binary_alternating":
+                case "ternary_alternating":
+                    State = new AlternatingTileState();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
