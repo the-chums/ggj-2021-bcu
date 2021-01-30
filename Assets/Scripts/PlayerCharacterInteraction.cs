@@ -73,6 +73,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
                             else
                             {
                                 Debug.Log("not entry: " + targetGridPos + ", type: " + gridTileType);
+                                return;
                             }
                         }
                     }
