@@ -29,5 +29,6 @@ public class Item : MonoBehaviour
     public void SetPosition(Vector2Int newPosition)
     {
         Position = newPosition;
+        transform.position = FindObjectOfType<GridHelper>().GridToWorldPos(newPosition);
     }
 }

@@ -53,7 +53,13 @@ public class PlayerCharacterInteraction : MonoBehaviour
                         var targetPos = charPos + transform.up;
                         var targetGridPos = GridHelper.WorldToGridPos(targetPos);
                         var gridTile = ConveyorTileManager.GetTileActionIdentifier(targetGridPos);
-                        Debug.Log(gridTile);
+
+                        if (gridTile.Contains("entry"))
+                        {
+                            FindObjectOfType<ConveyorItemMover>().AddItemToConveyor(HeldItem, targetGridPos);
+                            HeldItem.SetPosition(targetGridPos);
+                            HeldItem.OnPutDown();
+                        }
                     }
                 }
             }

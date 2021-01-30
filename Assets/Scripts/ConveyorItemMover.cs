@@ -16,6 +16,8 @@ public class ConveyorItemMover : MonoBehaviour
     {
         ConveyorTileManager = GetComponent<ConveyorTileManager>();
 
+        ItemsOnConveyor = new List<Item>();
+
         Debug.Assert(ConveyorTileManager);
     }
 
@@ -90,5 +92,10 @@ public class ConveyorItemMover : MonoBehaviour
                 return Direction.Up;
         }
     }
-    
+
+    public void AddItemToConveyor(Item item, Vector2Int position)
+    {
+        item.SetPosition(position);
+        ItemsOnConveyor.Add(item);
+    }
 }

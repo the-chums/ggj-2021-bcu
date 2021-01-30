@@ -42,7 +42,7 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
         if(tile != null)
         {
             // Check basic directions
-            var cardinalDirections = new string[] { "Up", "Right", "Down", "Left" };
+            var cardinalDirections = new string[] { "up", "right", "down", "left" };
 
             foreach(var direction in cardinalDirections)
             {
