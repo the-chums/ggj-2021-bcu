@@ -130,6 +130,7 @@ public class ConveyorItemMover : MonoBehaviour
     public void AddItemToConveyor(Item item, Vector2Int position)
     {
         item.SetPosition(position);
+        item.transform.rotation = Quaternion.identity;
         ItemsOnConveyor.Add(item);
     }
 }

@@ -11,6 +11,21 @@ public class WinLossTracker : MonoBehaviour
     private int Successes;
     private int Failures;
 
+    public int GetSuccesses()
+    {
+        return Successes;
+    }
+
+    public int GetSuccessToWin()
+    {
+        return SuccessesToWin;
+    }
+
+    public int GetFailures()
+    {
+        return Failures;
+    }
+
     void Start()
     {
         Debug.Assert(SuccessesToWin > 0 && FailuresToLose > 0);
@@ -27,7 +42,6 @@ public class WinLossTracker : MonoBehaviour
             OnFailure();
         }
 
-        Debug.Log("Successes - " + Successes + "/" + SuccessesToWin + "\tFailures - " + Failures + "/" + FailuresToLose);
     }
 
     public void OnSuccess()
