@@ -7,8 +7,9 @@ using Vector2 = UnityEngine.Vector2;
 
 public class PlayerCharacterMovement : MonoBehaviour
 {
-    public float Acceleration = 10f;
-    public float MaxVelocity = 5f;
+    public float Acceleration = 15f;
+    public float MaxVelocity = 6f;
+    public float MaxTimeToSpeed = 0.2f;
     
     private Rigidbody2D RigidBody;
 
@@ -22,7 +23,7 @@ public class PlayerCharacterMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        float accelerationDelta = Acceleration * Time.deltaTime;
+        float accelerationDelta = Acceleration / MaxTimeToSpeed * Time.deltaTime;
 
         float accelerationX = horizontalInput * accelerationDelta;
         float accelerationY = verticalInput * accelerationDelta;
