@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 299310051}
   - component: {fileID: 299310052}
   - component: {fileID: 299310053}
+  - component: {fileID: 299310054}
   m_Layer: 0
   m_Name: Tilemap_Conveyor
   m_TagString: Untagged
@@ -592,6 +593,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TickRate: 1
+--- !u!114 &299310054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299310047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac06bc28d3dc86489e73f50aed513bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SuccessesToWin: 3
+  FailuresToLose: 3
 --- !u!1 &782444293
 GameObject:
   m_ObjectHideFlags: 0
