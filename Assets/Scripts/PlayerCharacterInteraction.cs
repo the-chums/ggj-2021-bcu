@@ -39,6 +39,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
                         HeldItem = itemInRange;
                         itemInRange.transform.SetParent(transform);
                         itemInRange.OnPickedUp();
+                        break;
                     }
                 }
             }
