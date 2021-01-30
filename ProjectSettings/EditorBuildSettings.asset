@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SplashScreen.unity
+    guid: 35f8c5e75ebb3f543a68328d22d3b102
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: c74254fd433378a42adc2e0f1c16939f
+  - enabled: 1
+    path: Assets/Scenes/Rowan-POCScene.unity
+    guid: f9935bc643eb64e4b8d46edbe63557c1
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 70aa9a5a5e003b046bf914e1c5e40f6b
   m_configObjects: {}
