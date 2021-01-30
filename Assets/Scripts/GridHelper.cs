@@ -11,4 +11,11 @@ public class GridHelper : MonoBehaviour
         float floorPosY = Mathf.Floor(position.y);
         return new Vector2Int((int)floorPosX + XOffset, (int)floorPosY + YOffset);
     }
+
+    public Vector3 GridToWorldPos(Vector2Int position)
+    {
+        float floorPosX = position.x - XOffset;
+        float floorPosY = position.y - YOffset;
+        return new Vector3(floorPosX, floorPosY, 0);
+    }
 }
