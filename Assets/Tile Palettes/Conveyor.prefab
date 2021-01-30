@@ -192,7 +192,7 @@ Tilemap:
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 2147483649
+      m_AllTileFlags: 1073741825
   - first: {x: -3, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -284,7 +284,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 8bc2b9d08e6918048b14f33d1b3f49f1, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 1cf714bf778167e49980035b208d12a5, type: 2}
+    m_Data: {fileID: 11400000, guid: 22f7a3bf1f617e845b890ce75b77b539, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 68810021d4f5ef642b98f20be9048c0b, type: 2}
   - m_RefCount: 1

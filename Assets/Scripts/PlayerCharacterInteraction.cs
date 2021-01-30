@@ -20,11 +20,11 @@ public class PlayerCharacterInteraction : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            List<Collider2D> collidersInRange = new List<Collider2D>();
+            int collidersInRangeCount = BoxTrigger.OverlapCollider(new ContactFilter2D(), collidersInRange);
+
             if (HeldItem == null)
             {
-                List<Collider2D> collidersInRange = new List<Collider2D>();
-                int collidersInRangeCount = BoxTrigger.OverlapCollider(new ContactFilter2D(), collidersInRange);
-
                 if (collidersInRangeCount == 0)
                 {
                     return;
@@ -43,10 +43,30 @@ public class PlayerCharacterInteraction : MonoBehaviour
             }
             else
             {
-                HeldItem.transform.position = transform.position + transform.rotation * ItemDropOffset;
-                HeldItem.OnPutDown();
+                foreach (Collider2D colliderInRange in collidersInRange)
+                {
+                    var tilemapInRange = colliderInRange.GetComponent<UnityEngine.Tilemaps.TilemapCollider2D>();
+
+                    if (tilemapInRange)
+                    {
+                        var charPos = transform.position;
+                        var targetPos = charPos + transform.forward;
+                        var targetGridPos = WorldToGridPos(targetPos);
+
+                        //HeldItem = itemInRange;
+                        //itemInRange.OnPickedUp();
+                    }
+                }
+
+                //HeldItem.transform.position = transform.position + transform.rotation * ItemDropOffset;
+                //HeldItem.OnPutDown();
                 HeldItem = null;
             }
         }
+    }
+
+    private Vector2 WorldToGridPos(Vector2 position)
+    {
+        return position;
     }
 }
