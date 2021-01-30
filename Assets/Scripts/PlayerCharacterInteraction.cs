@@ -22,16 +22,23 @@ public class PlayerCharacterInteraction : MonoBehaviour
         {
             if (HeldItem == null)
             {
-                List<Collider2D> itemsInRange = new List<Collider2D>();
-                int itemsInRangeCount = BoxTrigger.OverlapCollider(new ContactFilter2D(), itemsInRange);
+                List<Collider2D> collidersInRange = new List<Collider2D>();
+                int collidersInRangeCount = BoxTrigger.OverlapCollider(new ContactFilter2D(), collidersInRange);
 
-                Debug.Assert(itemsInRangeCount <= 1);
-
-                if (itemsInRangeCount == 1)
+                if (collidersInRangeCount == 0)
                 {
-                    Item itemInRange = itemsInRange[0].GetComponent<Item>();
-                    HeldItem = itemInRange;
-                    itemInRange.OnPickedUp();
+                    return;
+                }
+
+                foreach (Collider2D colliderInRange in collidersInRange)
+                {
+                    Item itemInRange = colliderInRange.GetComponent<Item>();
+
+                    if (itemInRange)
+                    {
+                        HeldItem = itemInRange;
+                        itemInRange.OnPickedUp();
+                    }
                 }
             }
             else

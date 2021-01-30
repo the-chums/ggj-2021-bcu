@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
 {
     private SpriteRenderer Sprite;
 
+    private Vector2Int Position;
+
     void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
@@ -19,5 +21,15 @@ public class Item : MonoBehaviour
     public void OnPutDown()
     {
         Sprite.enabled = true;
+    }
+
+    public Vector2Int GetPosition()
+    {
+        return Position;
+    }
+
+    public void SetPosition(Vector2Int newPosition)
+    {
+        Position = newPosition;
     }
 }
