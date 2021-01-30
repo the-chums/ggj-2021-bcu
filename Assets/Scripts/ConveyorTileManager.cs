@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
 {
-    public Tilemap ConveyorTilemap;
-
+    private Dictionary<string, ConveyorTile> _tileMap = new Dictionary<string, ConveyorTile>();
+    
     void Start()
     {
-        Tilemap tilemap = ConveyorTilemap;
+        Tilemap tilemap = GetComponent<Tilemap>();
 
         BoundsInt bounds = tilemap.cellBounds;
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
@@ -20,22 +21,57 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 if (tile != null)
                 {
                     Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                }
-                else
-                {
-                    Debug.Log("x:" + x + " y:" + y + " tile: (null)");
+                    _tileMap.Add(GetCoordsKey(x,y), new ConveyorTile(x,y,tile.name));
                 }
             }
         }
     }
 
-    public string GetActiveTile(Vector2Int position)
+    private string GetCoordsKey(int x, int y)
     {
-        return null;
+        return $"{x}_{y}";
     }
 
-    public string GetCardinalTile(Vector2Int position, Direction direction)
+    public string GetTileActionIdentifier(Vector2Int position)
     {
-        return null;
+        // Find tile
+        var key = GetCoordsKey(position.x, position.y);
+        _tileMap.TryGetValue(key, out ConveyorTile tile);
+
+        // Return action
+        if(tile != null)
+        {
+            // Check basic directions
+            var cardinalDirections = new string[] { "Up", "Right", "Down", "Left" };
+
+            foreach(var direction in cardinalDirections)
+            {
+                if (tile.Name.Contains(direction))
+                {
+                    return direction;
+                }
+            }
+
+            // Otherwise return tile name directly
+            return tile.Name;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public class ConveyorTile
+    {
+        public int X;
+        public int Y;
+        public string Name;
+
+        public ConveyorTile(int x, int y, string name)
+        {
+            X = x;
+            Y = y;
+            Name = name;
+        }
     }
 }
