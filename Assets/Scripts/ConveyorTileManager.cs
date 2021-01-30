@@ -34,7 +34,7 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
         return null;
     }
 
-    public string GetCardinalTile(Vector2Int position, IConveyorTileLookup.Direction direction)
+    public string GetCardinalTile(Vector2Int position, Direction direction)
     {
         return null;
     }
