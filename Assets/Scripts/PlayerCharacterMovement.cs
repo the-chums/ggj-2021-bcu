@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Numerics;
+using UnityEngine;
 
 using Vector2 = UnityEngine.Vector2;
 
 public class PlayerCharacterMovement : MonoBehaviour
 {
-    public float Acceleration = 10f;
-    public float MaxVelocity = 5f;
-    public Transform CharacterFace;
-
-    private Rigidbody2D _rigidbody;
+    public float Acceleration = 15f;
+    public float MaxVelocity = 6f;
+    public float MaxTimeToSpeed = 0.2f;
+    
+    private Rigidbody2D RigidBody;
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        RigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -20,13 +23,13 @@ public class PlayerCharacterMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        float accelerationDelta = Acceleration * Time.deltaTime;
+        float accelerationDelta = Acceleration / MaxTimeToSpeed * Time.deltaTime;
 
         float accelerationX = horizontalInput * accelerationDelta;
         float accelerationY = verticalInput * accelerationDelta;
         Vector2 acceleration = new Vector2(accelerationX, accelerationY);
 
-        _rigidbody.velocity += acceleration;
+        RigidBody.velocity += acceleration;
 
         float zRotation = transform.eulerAngles.z;
 
@@ -53,6 +56,6 @@ public class PlayerCharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rigidbody.velocity = Vector2.ClampMagnitude(_rigidbody.velocity, MaxVelocity);
+        RigidBody.velocity = Vector2.ClampMagnitude(RigidBody.velocity, MaxVelocity);
     }
 }
