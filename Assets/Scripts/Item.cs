@@ -7,6 +7,8 @@ public class Item : MonoBehaviour
 
     private Vector2Int Position;
 
+    private bool PlacedOnConveyor = false;
+
     void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
@@ -36,5 +38,15 @@ public class Item : MonoBehaviour
     {
         Position = newPosition;
         transform.position = FindObjectOfType<GridHelper>().GridToWorldPos(newPosition);
+    }
+
+    public bool HasBeenPlacedOnConveyor()
+    {
+        return PlacedOnConveyor;
+    }
+
+    public void SetOnConveyor()
+    {
+        PlacedOnConveyor = true;
     }
 }

@@ -34,7 +34,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
                 {
                     Item itemInRange = colliderInRange.GetComponent<Item>();
 
-                    if (itemInRange)
+                    if (itemInRange && !itemInRange.HasBeenPlacedOnConveyor())
                     {
                         HeldItem = itemInRange;
                         itemInRange.transform.SetParent(transform);
@@ -65,6 +65,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
                         if (gridTileType.Contains("entry"))
                         {
                             FindObjectOfType<ConveyorItemMover>().AddItemToConveyor(HeldItem, targetGridPos);
+                            HeldItem.SetOnConveyor();
                             break;
                         }
                         else
