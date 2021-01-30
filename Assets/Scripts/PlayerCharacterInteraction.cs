@@ -57,10 +57,19 @@ public class PlayerCharacterInteraction : MonoBehaviour
                         
                         var gridTileType = ConveyorTileManager.GetTileTypeIdentifier(targetGridPos);
 
+                        if(gridTileType == null)
+                        {
+                            return;
+                        }
+
                         if (gridTileType.Contains("entry"))
                         {
                             FindObjectOfType<ConveyorItemMover>().AddItemToConveyor(HeldItem, targetGridPos);
                             break;
+                        }
+                        else
+                        {
+                            return;
                         }
                     }
                 }
