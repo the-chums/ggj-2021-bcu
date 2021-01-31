@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using System;
 
-[ExecuteInEditMode]
+
 public class EndNode : MonoBehaviour
 {
     public ItemColour ValidColor;
     public SpriteRenderer HeartRenderer;
     public Customer Customer;
+    public Boolean Destory;
 
     private SpriteRenderer _renderer;
     private WinLossTracker WinLossTracker;
@@ -42,10 +44,14 @@ public class EndNode : MonoBehaviour
         Item item = collision.GetComponent<Item>();
         if(item != null)
         {
-            if(item.Colour == ValidColor)
+            if(!Destory && item.Colour == ValidColor)
             {
                 WinLossTracker.OnSuccess();
                 Customer.ChangeCustomer();
+            }
+            if (Destory)
+            {
+                Debug.Log("wheyHEY!!!");
             }
             else
             {
