@@ -4468,7 +4468,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ConveyorManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 299310052}
     - target: {fileID: 6306121692562223775, guid: f69fdc2409366684eb8cd76544e6d701,
         type: 3}
       propertyPath: ConveyorDirectionIcon
