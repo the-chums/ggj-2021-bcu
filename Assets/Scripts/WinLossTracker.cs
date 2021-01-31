@@ -69,7 +69,7 @@ public class WinLossTracker : MonoBehaviour
     {
         Successes++;
 
-        if (Successes >= SuccessesToWin)
+        if (Successes >= SuccessesToWin && !LosePopup.gameObject.activeInHierarchy)
         {
             string currentScene = SceneManager.GetActiveScene().name;
             int levelIndex;
@@ -93,7 +93,7 @@ public class WinLossTracker : MonoBehaviour
     {
         Failures++;
 
-        if (Failures >= FailuresToLose)
+        if (Failures >= FailuresToLose && !WinPopup.gameObject.activeInHierarchy && !CompletionPopup.gameObject.activeInHierarchy)
         {
             Background.gameObject.SetActive(true);
             LosePopup.gameObject.SetActive(true);
