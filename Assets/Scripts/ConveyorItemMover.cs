@@ -124,11 +124,11 @@ public class ConveyorItemMover : MonoBehaviour
 
                     if (state.Count % 2 == 0)
                     {
-                        return Direction.Right;
+                        return Direction.Up;
                     }
                     else
                     {
-                        return Direction.Up;
+                        return Direction.Right;
                     }
                 }
             case "ternary_alternating":
