@@ -132,7 +132,9 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
 
             switch(name)
             {
-                case "binary_alternating":
+                case "binary_alternating_lr":
+                case "binary_alternating_lu":
+                case "binary_alternating_ru":
                 case "ternary_alternating":
                     State = new AlternatingTileState();
                     break;

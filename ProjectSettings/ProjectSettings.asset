@@ -661,10 +661,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 7c0a4027-6b32-420f-879f-bec1953adde3
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: lost_and_found
+  organizationId: seanthemighty
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

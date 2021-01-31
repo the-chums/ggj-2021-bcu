@@ -92,7 +92,7 @@ public class ConveyorItemMover : MonoBehaviour
                 return Direction.Down;
             case "left":
                 return Direction.Left;
-            case "binary_alternating":
+            case "binary_alternating_lr":
                 {
                     var state = (ConveyorTileManager.AlternatingTileState)tileState;
 
@@ -103,6 +103,32 @@ public class ConveyorItemMover : MonoBehaviour
                     else
                     {
                         return Direction.Right;
+                    }
+                }
+            case "binary_alternating_lu":
+                {
+                    var state = (ConveyorTileManager.AlternatingTileState)tileState;
+
+                    if (state.Count % 2 == 0)
+                    {
+                        return Direction.Left;
+                    }
+                    else
+                    {
+                        return Direction.Up;
+                    }
+                }
+            case "binary_alternating_ru":
+                {
+                    var state = (ConveyorTileManager.AlternatingTileState)tileState;
+
+                    if (state.Count % 2 == 0)
+                    {
+                        return Direction.Right;
+                    }
+                    else
+                    {
+                        return Direction.Up;
                     }
                 }
             case "ternary_alternating":
