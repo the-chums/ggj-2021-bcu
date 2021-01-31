@@ -21,7 +21,7 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 if (tile != null)
                 {
                     //Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                    _tileMap.Add(GetCoordsKey(x, y), new ConveyorTile(x, y, tile.name));
+                    _tileMap.Add(GetCoordsKey(x, y), new ConveyorTile(x, y, tile.name, tile));
                 }
             }
         }
@@ -30,6 +30,16 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
     private string GetCoordsKey(int x, int y)
     {
         return $"{x}_{y}";
+    }
+
+    public void Interact(Vector2Int position)
+    {
+        var tile = GetTile(position);
+
+        if (tile != null)
+        {
+            tile.Next();
+        }
     }
 
     public ConveyorTile GetTile(Vector2Int position)
@@ -105,15 +115,31 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
     public abstract class TileState
     {
         public abstract void UpdateOnItemLeaving();
+        public abstract void Next();
     };
 
     public class AlternatingTileState : TileState
     {
         public int Count;
+        public override void Next() { }
 
         public override void UpdateOnItemLeaving()
         {
             Count++;
+        }
+    }
+
+    public class ManualTileState : TileState
+    {
+        public int Rotation = 0;
+        public override void Next() 
+        {
+            Rotation += 90;
+            Rotation = Rotation % 360;
+        }
+
+        public override void UpdateOnItemLeaving()
+        {
         }
     }
 
@@ -123,8 +149,9 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
         public int Y;
         public string Name;
         public TileState State;
+        public TileBase Tile;
 
-        public ConveyorTile(int x, int y, string name)
+        public ConveyorTile(int x, int y, string name, TileBase tile)
         {
             X = x;
             Y = y;
@@ -138,8 +165,20 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 case "ternary_alternating":
                     State = new AlternatingTileState();
                     break;
+                case "manual_switch":
+                    State = new ManualTileState();
+                    break;
                 default:
                     break;
+            }
+        }
+
+        public void Next()
+        {
+            Debug.Log("Next called");
+            if (State != null)
+            {
+                State.Next();
             }
         }
     }

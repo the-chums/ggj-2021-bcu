@@ -79,7 +79,7 @@ public class ConveyorItemMover : MonoBehaviour
             tileState.UpdateOnItemLeaving();
         }
     }
-
+    
     Direction GetExitDirection(string tileAction, ConveyorTileManager.TileState tileState, Item item)
     {
         switch(tileAction)
@@ -146,6 +146,27 @@ public class ConveyorItemMover : MonoBehaviour
                     {
                         return Direction.Right;
                     }
+                }
+            case "manual_switch":
+                {
+                    var state = (ConveyorTileManager.ManualTileState)tileState;
+                    if (state.Rotation == 0)
+                    {
+                        return Direction.Left;
+                    }
+                    else if (state.Rotation == 90)
+                    {
+                        return Direction.Up;
+                    }
+                    else if (state.Rotation == 180)
+                    {
+                        return Direction.Right;
+                    }
+                    else
+                    {
+                        return Direction.Down;
+                    }
+                    break;
                 }
             default:
                 return Direction.None;

@@ -36,14 +36,22 @@ public class PlayerCharacterInteraction : MonoBehaviour
                 foreach (Collider2D colliderInRange in collidersInRange)
                 {
                     Item itemInRange = colliderInRange.GetComponent<Item>();
+                    InteractableLever leverInRange = colliderInRange.GetComponent<InteractableLever>();
 
-                    if (itemInRange && !itemInRange.HasBeenPlacedOnConveyor())
+                    // Lever logic
+                    if (leverInRange)
+                    {
+                        leverInRange.Operate();
+                    }
+                    // Item logic
+                    else if (itemInRange && !itemInRange.HasBeenPlacedOnConveyor())
                     {
                         HeldItem = itemInRange;
                         itemInRange.transform.SetParent(transform);
                         itemInRange.OnPickedUp();
                         break;
                     }
+                    
                 }
             }
             else
