@@ -53,7 +53,6 @@ public class ConveyorItemMover : MonoBehaviour
         ConveyorTileManager.TileState tileState = ConveyorTileManager.GetTileState(itemPosition);
 
         Direction currentTileExitDirection = GetExitDirection(currentTileAction, tileState, item);
-
         Vector2Int newPosition = itemPosition;
         
         switch(currentTileExitDirection)
@@ -76,7 +75,9 @@ public class ConveyorItemMover : MonoBehaviour
 
         if(tileState != null)
         {
-            tileState.UpdateOnItemLeaving();
+            tileState.UpdateState();
+            Direction nextTileExitDirection = GetExitDirection(currentTileAction, tileState, item);
+            tileState.UpdateDynamicTileState(nextTileExitDirection);
         }
     }
     

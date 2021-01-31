@@ -4,7 +4,10 @@ using UnityEngine.Tilemaps;
 
 public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
 {
+    public ConveyorTileDynamic[] DynamicTiles;
+    
     private Dictionary<string, ConveyorTile> _tileMap = new Dictionary<string, ConveyorTile>();
+    private Vector2Int GridOffset = new Vector2Int(19, 12);
 
     void Start()
     {
@@ -21,7 +24,21 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 if (tile != null)
                 {
                     //Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                    _tileMap.Add(GetCoordsKey(x, y), new ConveyorTile(x, y, tile.name, tile));
+                    
+                    
+                    ConveyorTileDynamic matchingDynamicTile = null;
+                    
+                    foreach(var dynamicTile in DynamicTiles)
+                    {
+                        if ((dynamicTile.GridCoords+GridOffset) == new Vector2Int(x, y))
+                        {
+                            matchingDynamicTile = dynamicTile;
+                        }
+                    }
+
+                    var conveyorTile = new ConveyorTile(x, y, tile.name, matchingDynamicTile);
+                    
+                    _tileMap.Add(GetCoordsKey(x, y), conveyorTile);
                 }
             }
         }
@@ -114,18 +131,49 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
 
     public abstract class TileState
     {
-        public abstract void UpdateOnItemLeaving();
+        public abstract void UpdateState();
+        public abstract void UpdateDynamicTileState(Direction direction);
         public abstract void Next();
     };
 
     public class AlternatingTileState : TileState
     {
+        public ConveyorTileDynamic _tileDynamic;
         public int Count;
         public override void Next() { }
 
-        public override void UpdateOnItemLeaving()
+        public AlternatingTileState(ConveyorTileDynamic tileDynamic) : base()
+        {
+            _tileDynamic = tileDynamic;
+        }
+
+        public override void UpdateState()
         {
             Count++;
+        }
+
+        public override void UpdateDynamicTileState(Direction nextDirection)
+        {
+
+            var angle = 0;
+            switch(nextDirection)
+            {
+                case Direction.Left:
+                    angle = 0;
+                    break;
+                case Direction.Up:
+                    angle = 270;
+                    break;
+                case Direction.Right:
+                    angle = 180;
+                    break;
+                case Direction.Down:
+                    angle = 90;
+                    break;
+            }
+
+            var rot = _tileDynamic.transform.rotation;
+            _tileDynamic.transform.rotation = Quaternion.Euler(new Vector3(rot.x, rot.y, angle));
         }
     }
 
@@ -138,9 +186,8 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
             Rotation = Rotation % 360;
         }
 
-        public override void UpdateOnItemLeaving()
-        {
-        }
+        public override void UpdateState() { }
+        public override void UpdateDynamicTileState(Direction direction) { }
     }
 
     public class ConveyorTile
@@ -149,9 +196,8 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
         public int Y;
         public string Name;
         public TileState State;
-        public TileBase Tile;
 
-        public ConveyorTile(int x, int y, string name, TileBase tile)
+        public ConveyorTile(int x, int y, string name, ConveyorTileDynamic dynamicTile)
         {
             X = x;
             Y = y;
@@ -163,7 +209,7 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 case "binary_alternating_lu":
                 case "binary_alternating_ru":
                 case "ternary_alternating":
-                    State = new AlternatingTileState();
+                    State = new AlternatingTileState(dynamicTile);
                     break;
                 case "manual_switch":
                     State = new ManualTileState();
