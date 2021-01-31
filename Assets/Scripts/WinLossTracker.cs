@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WinLossTracker : MonoBehaviour
@@ -10,6 +8,21 @@ public class WinLossTracker : MonoBehaviour
 
     private int Successes;
     private int Failures;
+
+    public int GetSuccesses()
+    {
+        return Successes;
+    }
+
+    public int GetSuccessToWin()
+    {
+        return SuccessesToWin;
+    }
+
+    public int GetFailures()
+    {
+        return Failures;
+    }
 
     void Start()
     {
@@ -27,7 +40,6 @@ public class WinLossTracker : MonoBehaviour
             OnFailure();
         }
 
-        Debug.Log("Successes - " + Successes + "/" + SuccessesToWin + "\tFailures - " + Failures + "/" + FailuresToLose);
     }
 
     public void OnSuccess()
