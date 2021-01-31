@@ -4,10 +4,15 @@ using UnityEngine.SceneManagement;
 public class WinLossTracker : MonoBehaviour
 {
     public int SuccessesToWin = 1;
-    public int FailuresToLose = 3;
+    private int FailuresToLose = 3;
 
     private int Successes;
     private int Failures;
+
+    private RectTransform WinPopup;
+    private RectTransform LosePopup;
+    private RectTransform CompletionPopup;
+    private RectTransform Background;
 
     public int GetSuccesses()
     {
@@ -27,19 +32,37 @@ public class WinLossTracker : MonoBehaviour
     void Start()
     {
         Debug.Assert(SuccessesToWin > 0 && FailuresToLose > 0);
+
+        WinPopup = transform.Find("Background/WinPopup").GetComponent<RectTransform>();
+        LosePopup = transform.Find("Background/LossPopup").GetComponent<RectTransform>();
+        CompletionPopup = transform.Find("Background/CompletionPopup").GetComponent<RectTransform>();
+        Background = transform.Find("Background").GetComponent<RectTransform>();
+
+        WinPopup.gameObject.SetActive(false);
+        LosePopup.gameObject.SetActive(false);
+        CompletionPopup.gameObject.SetActive(false);
+        Background.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.PageUp))
+        if(Input.GetKeyDown(KeyCode.A))
         {
-            OnSuccess();
+            if (WinPopup.gameObject.activeInHierarchy)
+            {
+                string currentScene = SceneManager.GetActiveScene().name;
+                int levelIndex;
+                if (int.TryParse(currentScene, out levelIndex))
+                {
+                    levelIndex++;
+                    SceneManager.LoadScene(levelIndex.ToString());
+                }
+            }
+            else if (LosePopup.gameObject.activeInHierarchy || CompletionPopup.gameObject.activeInHierarchy)
+            {
+                SceneManager.LoadScene("Menu");
+            }
         }
-        else if(Input.GetKeyDown(KeyCode.PageDown))
-        {
-            OnFailure();
-        }
-
     }
 
     public void OnSuccess()
@@ -52,8 +75,16 @@ public class WinLossTracker : MonoBehaviour
             int levelIndex;
             if (int.TryParse(currentScene, out levelIndex))
             {
-                levelIndex++;
-                SceneManager.LoadScene(levelIndex.ToString());
+                if(levelIndex < 10)
+                {
+                    Background.gameObject.SetActive(true);
+                    WinPopup.gameObject.SetActive(true);
+                }
+                else
+                {
+                    Background.gameObject.SetActive(true);
+                    CompletionPopup.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -64,7 +95,8 @@ public class WinLossTracker : MonoBehaviour
 
         if (Failures >= FailuresToLose)
         {
-            SceneManager.LoadScene("Menu");
+            Background.gameObject.SetActive(true);
+            LosePopup.gameObject.SetActive(true);
         }
     }
 }
