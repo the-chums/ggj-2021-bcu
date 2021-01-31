@@ -4342,7 +4342,7 @@ PrefabInstance:
     - target: {fileID: 5222803533213646060, guid: 91e428db9bdf65a43807d9abbc8aaf38,
         type: 3}
       propertyPath: SuccessesToWin
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91e428db9bdf65a43807d9abbc8aaf38, type: 3}
