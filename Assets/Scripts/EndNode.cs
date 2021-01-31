@@ -5,9 +5,9 @@ public class EndNode : MonoBehaviour
 {
     public ItemColour ValidColor;
     public SpriteRenderer HeartRenderer;
+    public Customer Customer;
 
     private SpriteRenderer _renderer;
-
     private WinLossTracker WinLossTracker;
     
     // Start is called before the first frame update
@@ -45,6 +45,7 @@ public class EndNode : MonoBehaviour
             if(item.Colour == ValidColor)
             {
                 WinLossTracker.OnSuccess();
+                Customer.ChangeCustomer();
             }
             else
             {
