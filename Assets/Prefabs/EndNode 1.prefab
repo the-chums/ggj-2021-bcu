@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 3751918044488320112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6, y: 7.27, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6918168, y: 1, z: 1}
   m_Children:
   - {fileID: 3751918045203005666}
   m_Father: {fileID: 0}
@@ -180,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ValidColor: {fileID: 11400000, guid: adfa3d2dd01179040b2cee42d92f8d04, type: 2}
   HeartRenderer: {fileID: 3751918043556674533}
+  Customer: {fileID: 2104806459122152680}
 --- !u!61 &3751918044488320078
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3751918045203005666}
   - component: {fileID: 3751918045203005667}
+  - component: {fileID: 2104806459122152680}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -253,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 3751918045203005669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3751918043556674530}
   m_Father: {fileID: 3751918044488320077}
@@ -309,3 +311,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2104806459122152680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751918045203005669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21e7858a55b6a545a375c9974ab8242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomerImages:
+  - {fileID: 21300000, guid: 41a1e5c903174c24cabcc931d62c5ae3, type: 3}
+  - {fileID: 21300000, guid: a117dbf1d4632f8408b1387ce6c073ed, type: 3}
+  - {fileID: 21300000, guid: 77bbdf2fd54edd743926ce4872e2b438, type: 3}
+  - {fileID: 21300000, guid: 11f8a683c99b43b42aa79932052cd037, type: 3}
+  ActiveIndex: 0
+  AnimationChangeDuration: 0.5
