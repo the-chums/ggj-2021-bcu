@@ -4,6 +4,7 @@
 public class EndNode : MonoBehaviour
 {
     public ItemColour ValidColor;
+    public SpriteRenderer HeartRenderer;
 
     private SpriteRenderer _renderer;
 
@@ -27,11 +28,16 @@ public class EndNode : MonoBehaviour
         if (ValidColor)
         {
             ColorUtility.TryParseHtmlString($"#{ValidColor.Hex}", out Color color);
-            _renderer.color = color;
+
+            if (_renderer)
+            {
+                _renderer.color = color;
+                HeartRenderer.color = color;
+            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.GetComponent<Item>();
         if(item != null)
