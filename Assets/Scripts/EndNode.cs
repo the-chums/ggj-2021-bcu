@@ -49,7 +49,7 @@ public class EndNode : MonoBehaviour
                 WinLossTracker.OnSuccess();
                 Customer.ChangeCustomer();
             }
-            if (Destory)
+            else if (Destory)
             {
                 Debug.Log("wheyHEY!!!");
             }

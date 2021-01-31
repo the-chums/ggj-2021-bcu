@@ -65,7 +65,7 @@ public class Menu : MonoBehaviour
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
         }
         
-        if(Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown(KeyCode.A))
         {
             if(SelectedOption == NewGameButton)
             {
@@ -84,7 +84,7 @@ public class Menu : MonoBehaviour
 
     public void OnNewGameClicked()
     {
-        SceneManager.LoadScene("1.1");
+        SceneManager.LoadScene("1");
     }
 
     public void OnCreditsClicked()
