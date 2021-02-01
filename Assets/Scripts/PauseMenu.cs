@@ -52,7 +52,7 @@ public void Update()
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if (SelectedOption == ResumeButton)
@@ -69,7 +69,7 @@ public void Update()
             }
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if (SelectedOption == ResumeButton)
@@ -111,11 +111,13 @@ public void Update()
 
     public void QuitToMenuClicked()
     {
+        SetPauseMenuState(false);
         SceneManager.LoadScene("Menu");
     }
 
     public void OnQuitToDesktopClicked()
     {
+        SetPauseMenuState(false);
         Application.Quit();
     }
 }

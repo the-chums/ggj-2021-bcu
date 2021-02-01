@@ -30,7 +30,7 @@ public class Menu : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0)
+        if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if(SelectedOption == NewGameButton)
@@ -47,7 +47,7 @@ public class Menu : MonoBehaviour
             }
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if (SelectedOption == NewGameButton)
