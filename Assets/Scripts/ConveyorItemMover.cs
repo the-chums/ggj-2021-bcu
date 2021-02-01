@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ConveyorItemMover : MonoBehaviour
 {
-    public float TickRate = 0.75f;
+    private float TickRate = 0.75f;
 
     private List<Item> ItemsOnConveyor;
 
