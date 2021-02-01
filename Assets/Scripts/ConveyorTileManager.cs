@@ -11,6 +11,11 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
 
     void Start()
     {
+        initialiseTilemap();
+    }
+
+    private void initialiseTilemap()
+    {
         Tilemap tilemap = GetComponent<Tilemap>();
 
         BoundsInt bounds = tilemap.cellBounds;
@@ -24,24 +29,36 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
                 if (tile != null)
                 {
                     //Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                    
-                    
+
                     ConveyorTileDynamic matchingDynamicTile = null;
-                    
-                    foreach(var dynamicTile in DynamicTiles)
+
+                    if(DynamicTiles != null)
                     {
-                        if ((dynamicTile.GridCoords+GridOffset) == new Vector2Int(x, y))
+                        foreach (var dynamicTile in DynamicTiles)
                         {
-                            matchingDynamicTile = dynamicTile;
+                            if ((dynamicTile.GridCoords + GridOffset) == new Vector2Int(x, y))
+                            {
+                                matchingDynamicTile = dynamicTile;
+                            }
                         }
                     }
 
                     var conveyorTile = new ConveyorTile(x, y, tile.name, matchingDynamicTile);
-                    
+
                     _tileMap.Add(GetCoordsKey(x, y), conveyorTile);
                 }
             }
         }
+    }
+
+    private Dictionary<string, ConveyorTile> GetTilemap()
+    {
+        if(_tileMap.Count == 0)
+        {
+            initialiseTilemap();
+        }
+
+        return _tileMap;
     }
 
     private string GetCoordsKey(int x, int y)
@@ -63,7 +80,7 @@ public class ConveyorTileManager : MonoBehaviour, IConveyorTileLookup
     {
         // Find tile
         var key = GetCoordsKey(position.x, position.y);
-        _tileMap.TryGetValue(key, out ConveyorTile tile);
+        GetTilemap().TryGetValue(key, out ConveyorTile tile);
 
         // Return action
         if (tile != null)
