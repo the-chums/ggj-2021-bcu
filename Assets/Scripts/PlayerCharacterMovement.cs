@@ -21,10 +21,12 @@ public class PlayerCharacterMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0f || Input.GetAxisRaw("Vertical") != 0f)
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (horizontalInput != 0f || verticalInput != 0f)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
+
             float accelerationDelta = Acceleration / MaxTimeToSpeed * Time.deltaTime;
 
             float accelerationX = horizontalInput * accelerationDelta;
