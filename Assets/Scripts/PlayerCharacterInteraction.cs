@@ -19,7 +19,7 @@ public class PlayerCharacterInteraction : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
         {
             List<Collider2D> collidersInRange = new List<Collider2D>();
             int collidersInRangeCount = InteractableBoxTrigger.OverlapCollider(new ContactFilter2D(), collidersInRange);

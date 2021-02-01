@@ -30,7 +30,7 @@ public class Menu : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0)
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if(SelectedOption == NewGameButton)
@@ -47,7 +47,7 @@ public class Menu : MonoBehaviour
             }
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if (SelectedOption == NewGameButton)
@@ -64,8 +64,8 @@ public class Menu : MonoBehaviour
             }
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
         }
-        
-        if(Input.GetKeyDown(KeyCode.A))
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
         {
             if(SelectedOption == NewGameButton)
             {

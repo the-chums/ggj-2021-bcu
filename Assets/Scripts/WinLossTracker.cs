@@ -46,7 +46,7 @@ public class WinLossTracker : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
         {
             if (WinPopup.gameObject.activeInHierarchy)
             {

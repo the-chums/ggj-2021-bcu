@@ -16,7 +16,7 @@ public class FTUEPrompt : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if(Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyDown("joystick button 0"))
         {
             CharacterMovement.enabled = true;
             gameObject.SetActive(false);
