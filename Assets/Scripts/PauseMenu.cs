@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject MenuContainer;
 
     private RectTransform ResumeButton;
+    private RectTransform RestartButton;
     private RectTransform QuitToMenuButton;
     private RectTransform QuitToDesktopButton;
 
@@ -18,6 +19,7 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         ResumeButton = transform.Find("Background/ResumeButton").GetComponent<RectTransform>();
+        RestartButton = transform.Find("Background/RestartLevelButton").GetComponent<RectTransform>();
         QuitToMenuButton = transform.Find("Background/QuitToMenuButton").GetComponent<RectTransform>();
         QuitToDesktopButton = transform.Find("Background/QuitToDesktopButton").GetComponent<RectTransform>();
 
@@ -26,6 +28,7 @@ public class PauseMenu : MonoBehaviour
         SelectedOption = ResumeButton;
 
         ResumeButton.Find("SelectedIndicators").gameObject.SetActive(true);
+        RestartButton.Find("SelectedIndicators").gameObject.SetActive(false);
         QuitToMenuButton.Find("SelectedIndicators").gameObject.SetActive(false);
         QuitToDesktopButton.Find("SelectedIndicators").gameObject.SetActive(false);
     }
@@ -35,10 +38,9 @@ public class PauseMenu : MonoBehaviour
         _showMenu = paused;
         Time.timeScale = paused ? 0.0f : 1.0f;
         MenuContainer.SetActive(paused);
+    }
 
-}
-
-public void Update()
+    public void Update()
     {
         if (Input.GetKeyDown("escape") || Input.GetKeyDown("joystick button 7"))
         {
@@ -59,6 +61,10 @@ public void Update()
             {
                 SelectedOption = QuitToDesktopButton;
             }
+            else if (SelectedOption == RestartButton)
+            {
+                SelectedOption = RestartButton;
+            }
             else if (SelectedOption == QuitToMenuButton)
             {
                 SelectedOption = ResumeButton;
@@ -73,6 +79,10 @@ public void Update()
         {
             SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
             if (SelectedOption == ResumeButton)
+            {
+                SelectedOption = RestartButton;
+            }
+            else if (SelectedOption == RestartButton)
             {
                 SelectedOption = QuitToMenuButton;
             }
@@ -93,6 +103,10 @@ public void Update()
             {
                 OnResumeClicked();
             }
+            else if (SelectedOption == RestartButton)
+            {
+                OnRestartClicked();
+            }
             else if (SelectedOption == QuitToMenuButton)
             {
                 QuitToMenuClicked();
@@ -104,9 +118,16 @@ public void Update()
         }
     }
 
-    private void OnResumeClicked()
+    public void OnResumeClicked()
     {
         SetPauseMenuState(false);
+    }
+
+    public void OnRestartClicked()
+    {
+        SetPauseMenuState(false);
+        FirstEscIgnored = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitToMenuClicked()
