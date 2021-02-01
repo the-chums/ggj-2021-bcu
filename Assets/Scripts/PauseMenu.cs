@@ -35,9 +35,10 @@ public class PauseMenu : MonoBehaviour
         _showMenu = paused;
         Time.timeScale = paused ? 0.0f : 1.0f;
         MenuContainer.SetActive(paused);
-    }
 
-    public void Update()
+}
+
+public void Update()
     {
         if (Input.GetKeyDown("escape") || Input.GetKeyDown("joystick button 7"))
         {

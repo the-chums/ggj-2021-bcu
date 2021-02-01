@@ -8123,7 +8123,7 @@ PrefabInstance:
     - target: {fileID: 5222803533213646060, guid: 91e428db9bdf65a43807d9abbc8aaf38,
         type: 3}
       propertyPath: SuccessesToWin
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91e428db9bdf65a43807d9abbc8aaf38, type: 3}
@@ -9186,6 +9186,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: MaxVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: Acceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: MaxTimeToSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: decelerationSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8241543009751648712, guid: bebe714397062664182e16a0b4f8d0d3,
         type: 3}

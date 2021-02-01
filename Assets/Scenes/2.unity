@@ -8120,6 +8120,26 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: MaxVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: Acceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: MaxTimeToSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241543009751648711, guid: bebe714397062664182e16a0b4f8d0d3,
+        type: 3}
+      propertyPath: decelerationSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8241543009751648712, guid: bebe714397062664182e16a0b4f8d0d3,
         type: 3}
       propertyPath: m_RootOrder
