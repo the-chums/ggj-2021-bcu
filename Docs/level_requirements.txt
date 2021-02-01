@@ -1,0 +1,145 @@
+tickrate - 0.75
+
+PlayerCharacter;
+ - Acceleration: 25
+ - Max Velocity: 8
+ - Max Time To Speed: 0.15
+ - Deceleration Speed: 15
+
+level 1:
+ - purple x 4
+ -- extra 0
+total success x 4
+fails x 3
+extras x 0
+4 items
+
+level 2:
+ - yellow x 3
+ -- extra 0
+ - green x 3
+ -- extra 0
+total success x 6
+fails x 3
+extras x 0
+6 items
+
+level 3:
+ - red x 4
+ -- extra 1
+ - yellow x 3
+ -- extra 1
+ - green x 3
+ -- extra 1
+total success x 10
+fails x 3
+extras x 3
+13 items
+
+level 4:
+ - blue x 3
+ -- extra 1
+ - red x 2
+ -- extra 1
+ - yellow x 4
+ -- extra 2
+ - green x 4
+ -- extra 2
+total success x 13
+fails x 3
+extras x 6
+19 items
+
+level 5:
+ - blue x 3
+ -- extra 1
+ - red x 2
+ -- extra 1
+ - yellow x 4
+ -- extra 2
+ - purple x 2
+ -- extra 1
+ - green x 3
+ -- extra 2
+total success x 14
+fails x 3
+extras x 6
+20 items
+
+level 6:
+ - red x 4
+ -- extra 1
+ - purple x 3
+ -- extra 1
+ - green x 2
+ -- extra 1
+total success x 9
+fails x 3
+extras x 3
+12 items
+
+level 7:
+ - red x 5
+ -- extra 2
+ - yellow x 2
+ -- extra 1
+ - purple x 2
+ -- extra 1
+ - green x 2
+ -- extra 1
+total success x 11
+fails x 3
+extras x 5
+16 items
+
+level 8:
+ - red x 5
+ -- extra 2
+ - yellow x 2
+ -- extra 1
+ - purple x 4
+ -- extra 2
+ - green x 2
+ -- extra 1
+ - blue x 1
+ -- extra 1
+total success x 14
+fails x 3
+extras x 7
+21 items
+
+### Level 9 needs finishing ### 
+
+level 9:
+ - red x 5
+ -- extra 2
+ - yellow x 2
+ -- extra 1
+ - purple x 4
+ -- extra 2
+ - green x 2
+ -- extra 1
+ - blue x 1
+ -- extra 1
+total success x 14
+fails x 3
+extras x 6
+20 items
+
+### Level 10 needs finishing ### 
+
+level 10: 
+ - blue x 3
+ -- extra 1
+ - red x 2
+ -- extra 1
+ - yellow x 4
+ -- extra 2
+ - purple x 2
+ -- extra 1
+ - green x 3
+ -- extra 2
+total success x 14
+fails x 3
+extras x 6
+20 items
