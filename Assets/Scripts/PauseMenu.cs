@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     private RectTransform QuitToDesktopButton;
 
     private RectTransform SelectedOption;
-    private bool _showMenu = false;
+    private bool _showingMenu = false;
 
     public bool IgnoreFirstEsc = false;
     private bool FirstEscIgnored = false;
@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SetPauseMenuState(bool paused)
     {
-        _showMenu = paused;
+        _showingMenu = paused;
         Time.timeScale = paused ? 0.0f : 1.0f;
         MenuContainer.SetActive(paused);
     }
@@ -50,70 +50,73 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                SetPauseMenuState(!_showMenu);
+                SetPauseMenuState(!_showingMenu);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (_showingMenu)
         {
-            SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
-            if (SelectedOption == ResumeButton)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                SelectedOption = QuitToDesktopButton;
+                SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
+                if (SelectedOption == ResumeButton)
+                {
+                    SelectedOption = QuitToDesktopButton;
+                }
+                else if (SelectedOption == RestartButton)
+                {
+                    SelectedOption = ResumeButton;
+                }
+                else if (SelectedOption == QuitToMenuButton)
+                {
+                    SelectedOption = RestartButton;
+                }
+                else if (SelectedOption == QuitToDesktopButton)
+                {
+                    SelectedOption = QuitToMenuButton;
+                }
+                SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
             }
-            else if (SelectedOption == RestartButton)
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                SelectedOption = RestartButton;
+                SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
+                if (SelectedOption == ResumeButton)
+                {
+                    SelectedOption = RestartButton;
+                }
+                else if (SelectedOption == RestartButton)
+                {
+                    SelectedOption = QuitToMenuButton;
+                }
+                else if (SelectedOption == QuitToMenuButton)
+                {
+                    SelectedOption = QuitToDesktopButton;
+                }
+                else if (SelectedOption == QuitToDesktopButton)
+                {
+                    SelectedOption = ResumeButton;
+                }
+                SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
             }
-            else if (SelectedOption == QuitToMenuButton)
-            {
-                SelectedOption = ResumeButton;
-            }
-            else if (SelectedOption == QuitToDesktopButton)
-            {
-                SelectedOption = QuitToMenuButton;
-            }
-            SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            SelectedOption.Find("SelectedIndicators").gameObject.SetActive(false);
-            if (SelectedOption == ResumeButton)
-            {
-                SelectedOption = RestartButton;
-            }
-            else if (SelectedOption == RestartButton)
-            {
-                SelectedOption = QuitToMenuButton;
-            }
-            else if (SelectedOption == QuitToMenuButton)
-            {
-                SelectedOption = QuitToDesktopButton;
-            }
-            else if (SelectedOption == QuitToDesktopButton)
-            {
-                SelectedOption = ResumeButton;
-            }
-            SelectedOption.Find("SelectedIndicators").gameObject.SetActive(true);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
-        {
-            if (SelectedOption == ResumeButton)
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
             {
-                OnResumeClicked();
-            }
-            else if (SelectedOption == RestartButton)
-            {
-                OnRestartClicked();
-            }
-            else if (SelectedOption == QuitToMenuButton)
-            {
-                QuitToMenuClicked();
-            }
-            else if (SelectedOption == QuitToDesktopButton)
-            {
-                OnQuitToDesktopClicked();
+                if (SelectedOption == ResumeButton)
+                {
+                    OnResumeClicked();
+                }
+                else if (SelectedOption == RestartButton)
+                {
+                    OnRestartClicked();
+                }
+                else if (SelectedOption == QuitToMenuButton)
+                {
+                    QuitToMenuClicked();
+                }
+                else if (SelectedOption == QuitToDesktopButton)
+                {
+                    OnQuitToDesktopClicked();
+                }
             }
         }
     }
