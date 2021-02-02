@@ -68,6 +68,8 @@ public class Item : MonoBehaviour
         {
             ColorUtility.TryParseHtmlString($"#{Colour.Hex}", out Color color);
             BackgroundSprite.color = color;
+            Debug.Log("Colour");
+            Debug.Log(Colour.Name);
         }
     }
 }
