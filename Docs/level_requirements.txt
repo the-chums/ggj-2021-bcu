@@ -108,8 +108,6 @@ fails x 3
 extras x 7
 21 items
 
-### Level 9 needs testing ### 
-
 level 9:
  - red x 5
  -- extra 2
@@ -126,9 +124,7 @@ fails x 3
 extras x 10
 27 items
 
-### Level 10 needs testing ### 
-
-level 9:
+level 10:
  - red x 6
  -- extra 2
  - yellow x 4
