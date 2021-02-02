@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3751918043556674532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3751918045203005666}
   m_RootOrder: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 3751918044488320112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6, y: 7.27, z: 10}
-  m_LocalScale: {x: 0.6918168, y: 1, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.85, z: 1}
   m_Children:
   - {fileID: 3751918045203005666}
   m_Father: {fileID: 0}
@@ -181,6 +181,7 @@ MonoBehaviour:
   ValidColor: {fileID: 11400000, guid: adfa3d2dd01179040b2cee42d92f8d04, type: 2}
   HeartRenderer: {fileID: 3751918043556674533}
   Customer: {fileID: 2104806459122152680}
+  Destory: 0
 --- !u!61 &3751918044488320078
 BoxCollider2D:
   m_ObjectHideFlags: 0
