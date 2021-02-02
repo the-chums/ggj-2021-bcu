@@ -108,38 +108,38 @@ fails x 3
 extras x 7
 21 items
 
-### Level 9 needs finishing ### 
+### Level 9 needs testing ### 
 
 level 9:
  - red x 5
  -- extra 2
- - yellow x 2
- -- extra 1
+ - yellow x 3
+ -- extra 2
  - purple x 4
  -- extra 2
- - green x 2
- -- extra 1
- - blue x 1
- -- extra 1
-total success x 14
-fails x 3
-extras x 6
-20 items
-
-### Level 10 needs finishing ### 
-
-level 10: 
- - blue x 3
- -- extra 1
- - red x 2
- -- extra 1
- - yellow x 4
- -- extra 2
- - purple x 2
- -- extra 1
  - green x 3
  -- extra 2
-total success x 14
+ - blue x 2
+ -- extra 2
+total success x 17
 fails x 3
-extras x 6
-20 items
+extras x 10
+27 items
+
+### Level 10 needs testing ### 
+
+level 9:
+ - red x 6
+ -- extra 2
+ - yellow x 4
+ -- extra 2
+ - purple x 5
+ -- extra 2
+ - green x 4
+ -- extra 2
+ - blue x 3
+ -- extra 2
+total success x 22
+fails x 3
+extras x 10
+32 items
