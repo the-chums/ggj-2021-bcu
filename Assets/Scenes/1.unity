@@ -6033,6 +6033,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinLossTracker
       objectReference: {fileID: 0}
+    - target: {fileID: 5222803533213646060, guid: 91e428db9bdf65a43807d9abbc8aaf38,
+        type: 3}
+      propertyPath: ParcelHead
+      value: 
+      objectReference: {fileID: 61578781}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91e428db9bdf65a43807d9abbc8aaf38, type: 3}
 --- !u!1001 &1438610987
