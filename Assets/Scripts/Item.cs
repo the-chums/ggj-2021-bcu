@@ -5,7 +5,7 @@ public class Item : MonoBehaviour
 {
     public ItemColour Colour;
     public ItemType Type;
-    
+    public string item_colour;
     public SpriteRenderer BackgroundSprite;
 
     private SpriteRenderer Sprite;
@@ -17,6 +17,7 @@ public class Item : MonoBehaviour
 
     void Start()
     {
+        item_colour = Colour.Name;
         Sprite = GetComponent<SpriteRenderer>();
         Collider = GetComponent<BoxCollider2D>();
     }
@@ -68,8 +69,6 @@ public class Item : MonoBehaviour
         {
             ColorUtility.TryParseHtmlString($"#{Colour.Hex}", out Color color);
             BackgroundSprite.color = color;
-            Debug.Log("Colour");
-            Debug.Log(Colour.Name);
         }
     }
 }

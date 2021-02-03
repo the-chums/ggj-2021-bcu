@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colour: {fileID: 11400000, guid: 7b2dcb25902cb1146a6800e5afbfa8e1, type: 2}
   Type: {fileID: 11400000, guid: 3d363062e460c4a4c8cea49d0cc1b8f3, type: 2}
+  item_colour: 
   BackgroundSprite: {fileID: 3115513044246257611}
 --- !u!212 &233258802299465245
 SpriteRenderer:
