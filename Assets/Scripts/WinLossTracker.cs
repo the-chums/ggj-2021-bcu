@@ -9,11 +9,13 @@ public class WinLossTracker : MonoBehaviour
     public int SuccessesToWin = 1;
     private int FailuresToLose = 3;
 
-    private Dictionary<string, object> analytics_event = new Dictionary<string,object>();
-
+    private Dictionary<string, object> analytics_start = new Dictionary<string,object>();
+    private Dictionary<string, object> analytics_end = new Dictionary<string, object>();
     public GameObject ParcelHead;
     private int Successes;
     private int Failures;
+
+    private float timer = 0.0f;
 
     private RectTransform WinPopup;
     private RectTransform LosePopup;
@@ -40,15 +42,16 @@ public class WinLossTracker : MonoBehaviour
     {
         Debug.Assert(SuccessesToWin > 0 && FailuresToLose > 0);
         int Level = Convert.ToInt32(SceneManager.GetActiveScene().name);
-        analytics_event.Add( "level_number", Level);
-        analytics_event.Add("deliveries_to_pass", SuccessesToWin);
-        analytics_event.Add( "max_fails", FailuresToLose);
-        analytics_event.Add("start_items", GetAllItems());
-        analytics_event.Add("start_blue", GetItemCount("blue"));
-        analytics_event.Add("start_green", GetItemCount("green"));
-        analytics_event.Add("start_purple", GetItemCount("purple"));
-        analytics_event.Add("start_red", GetItemCount("red"));
-        analytics_event.Add("start_yellow", GetItemCount("yellow"));
+        analytics_start.Add("level_number", Level);
+        analytics_start.Add("deliveries_to_pass", SuccessesToWin);
+        analytics_start.Add("max_fails", FailuresToLose);
+        analytics_start.Add("start_items", GetAllItems());
+        analytics_start.Add("start_blue", GetItemCount("blue"));
+        analytics_start.Add("start_green", GetItemCount("green"));
+        analytics_start.Add("start_purple", GetItemCount("purple"));
+        analytics_start.Add("start_red", GetItemCount("red"));
+        analytics_start.Add("start_yellow", GetItemCount("yellow"));
+        AnalyticsEventFire("level_start", analytics_start);
         WinPopup = transform.Find("Background/WinPopup").GetComponent<RectTransform>();
         LosePopup = transform.Find("Background/LossPopup").GetComponent<RectTransform>();
         CompletionPopup = transform.Find("Background/CompletionPopup").GetComponent<RectTransform>();
@@ -62,7 +65,8 @@ public class WinLossTracker : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
+        timer += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
         {
             if (WinPopup.gameObject.activeInHierarchy)
             {
@@ -87,15 +91,18 @@ public class WinLossTracker : MonoBehaviour
 
         if (Successes >= SuccessesToWin && !LosePopup.gameObject.activeInHierarchy)
         {
-            analytics_event.Add( "end_items", GetAllItems());
-            analytics_event.Add("end_blue", GetItemCount("blue"));
-            analytics_event.Add("end_green", GetItemCount("green"));
-            analytics_event.Add( "end_purple", GetItemCount("purple"));
-            analytics_event.Add("end_red", GetItemCount("red"));
-            analytics_event.Add( "end_yellow", GetItemCount("yellow"));
-            analytics_event.Add("total_failures", Failures);
-            analytics_event.Add("event_type", 1);
-            AnalyticsEventFire();
+            int Level = Convert.ToInt32(SceneManager.GetActiveScene().name);
+            analytics_end.Add("level_number", Level);
+            analytics_end.Add("deliveries_to_pass", SuccessesToWin);
+            analytics_end.Add("end_items", GetAllItems());
+            analytics_end.Add("end_blue", GetItemCount("blue"));
+            analytics_end.Add("end_green", GetItemCount("green"));
+            analytics_end.Add("end_purple", GetItemCount("purple"));
+            analytics_end.Add("end_red", GetItemCount("red"));
+            analytics_end.Add("end_yellow", GetItemCount("yellow"));
+            analytics_end.Add("total_failures", Failures);
+            analytics_end.Add("level_time", timer);
+            AnalyticsEventFire("level_complete", analytics_end);
             string currentScene = SceneManager.GetActiveScene().name;
             int levelIndex;
             if (int.TryParse(currentScene, out levelIndex))
@@ -120,15 +127,17 @@ public class WinLossTracker : MonoBehaviour
 
         if (Failures >= FailuresToLose && !WinPopup.gameObject.activeInHierarchy && !CompletionPopup.gameObject.activeInHierarchy)
         {
-            analytics_event.Add( "end_items", GetAllItems());
-            analytics_event.Add( "end_blue", GetItemCount("blue"));
-            analytics_event.Add("end_green", GetItemCount("green"));
-            analytics_event.Add("end_purple", GetItemCount("purple"));
-            analytics_event.Add("end_red", GetItemCount("red"));
-            analytics_event.Add("end_yellow", GetItemCount("yellow"));
-            analytics_event.Add("total_failures", Failures);
-            analytics_event.Add("event_type", 0);
-            AnalyticsEventFire();
+            int Level = Convert.ToInt32(SceneManager.GetActiveScene().name);
+            analytics_end.Add("level_number", Level);
+            analytics_end.Add("deliveries_to_pass", SuccessesToWin);
+            analytics_end.Add("end_items", GetAllItems());
+            analytics_end.Add("end_blue", GetItemCount("blue"));
+            analytics_end.Add("end_green", GetItemCount("green"));
+            analytics_end.Add("end_purple", GetItemCount("purple"));
+            analytics_end.Add("end_red", GetItemCount("red"));
+            analytics_end.Add("end_yellow", GetItemCount("yellow"));
+            AnalyticsEventFire("level_failed", analytics_end);
+            analytics_end.Add("level_time", timer);
             Background.gameObject.SetActive(true);
             LosePopup.gameObject.SetActive(true);
         }
@@ -169,9 +178,9 @@ public class WinLossTracker : MonoBehaviour
         return colour_count;
     }
 
-    public void AnalyticsEventFire()
+    public void AnalyticsEventFire(string event_type, Dictionary<string, object> analytics_event)
     {
-        AnalyticsResult result = Analytics.CustomEvent("level_end", analytics_event);
+        AnalyticsResult result = Analytics.CustomEvent(event_type, analytics_event);
         Debug.Log(result);
     }
 }
