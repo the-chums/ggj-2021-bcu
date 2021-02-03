@@ -1,7 +1,7 @@
 {
 "companyName": "The Chums",
 "productName": "PPPWSHMWTB!",
-"productVersion": "0.1",
+"productVersion": "0.2",
 "dataUrl": "WebGL-Build.data.unityweb",
 "wasmCodeUrl": "WebGL-Build.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL-Build.wasm.framework.unityweb",
