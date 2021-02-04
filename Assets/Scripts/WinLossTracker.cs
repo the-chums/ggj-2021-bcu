@@ -136,8 +136,8 @@ public class WinLossTracker : MonoBehaviour
             analytics_end.Add("end_purple", GetItemCount("purple"));
             analytics_end.Add("end_red", GetItemCount("red"));
             analytics_end.Add("end_yellow", GetItemCount("yellow"));
-            AnalyticsEventFire("level_failed", analytics_end);
             analytics_end.Add("level_time", timer);
+            AnalyticsEventFire("level_failed", analytics_end);
             Background.gameObject.SetActive(true);
             LosePopup.gameObject.SetActive(true);
         }
